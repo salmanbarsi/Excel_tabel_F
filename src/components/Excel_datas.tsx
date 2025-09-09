@@ -15,7 +15,7 @@ function Excel_datas() {
   const fetchFiles = () => {
     setLoading(true);
     axios
-      .get("http://localhost:2000/db-files")
+      .get("https://excel-tabel-b.onrender.com/db-files")
       .then((res) => setUploadedFiles(res.data))
       .catch((err) => {
         console.error("Fetch files error:", err);
@@ -56,7 +56,7 @@ function Excel_datas() {
 
     setLoading(true);
     try {
-      await axios.post("http://localhost:2000/upload", formData, {
+      await axios.post("https://excel-tabel-b.onrender.com/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert("File uploaded successfully!");
@@ -81,7 +81,7 @@ function Excel_datas() {
 
     setLoading(true);
     try {
-      await axios.delete(`http://localhost:2000/db-files/${tableName}`);
+      await axios.delete(`https://excel-tabel-b.onrender.com/db-files/${tableName}`);
       alert(`able "${tableName}" deleted successfully!`);
       fetchFiles();
     } 
