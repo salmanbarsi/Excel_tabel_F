@@ -21,7 +21,7 @@ const Tableview = () => {
     if (!tableName) return;
     setLoading(true);
     axios
-      .get(`http://localhost:2000/data/${tableName}?page=${page}&limit=${limit}`)
+      .get(`https://excel-tabel-b.onrender.com/data/${tableName}?page=${page}&limit=${limit}`)
       .then((res) => {
         setTableData(res.data.data);
         setTotalRecords(res.data.total);
@@ -39,7 +39,7 @@ const Tableview = () => {
   if (!tableName) return;
 
   axios
-    .get(`http://localhost:2000/data/${tableName}?page=1&limit=1000000`)
+    .get(`https://excel-tabel-b.onrender.com/data/${tableName}?page=1&limit=1000000`)
     .then((res) => {
       const allData = res.data.data;
       if (!allData.length) return;
@@ -64,7 +64,7 @@ const Tableview = () => {
   const objkey = Object.keys(editRecord).find(key => key.toLowerCase().includes("id")); 
   const recordId = objkey ? editRecord[objkey] : undefined;
   axios
-    .put(`http://localhost:2000/data/${tableName}/${recordId}`, editRecord)
+    .put(`https://excel-tabel-b.onrender.com/data/${tableName}/${recordId}`, editRecord)
     .then(() => {
       alert("Record updated successfully!");
       setselectedRecord(null);
