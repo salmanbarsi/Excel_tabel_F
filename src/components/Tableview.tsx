@@ -185,29 +185,26 @@ const Tableview = () => {
                 <tbody className="text-left font-mono">
                   {Object.entries(editRecord).map(([key, value]) => {
                     const isIdField = key.toLowerCase().includes("id");
-                    const isDateField =
-                      key.toLowerCase().includes("date") ||
-                      key.toLowerCase().includes("dob") ||
-                      key.toLowerCase().includes("joining");
+                    const isDateField = key.toLowerCase().includes("date") || key.toLowerCase().includes("dob") || key.toLowerCase().includes("joining");
+                    const isGender = key.toLowerCase().includes("gender");
 
                     return (
                       <tr key={key}>
                         <td className="font-semibold pr-4 text-white text-lg">{key}</td>
                         <td>
                           {isIdField ? (
-                            <input
-                              disabled
-                              value={String(value)}
-                              className="bg-gray-800 text-gray-400 block w-full border rounded-md py-2 px-2"
-                            />
+                            <input disabled value={String(value)} className="bg-gray-800 text-gray-400 block w-full border rounded-md py-2 px-2"/>
+                          ) : isGender ? (
+                            <select value={String(editRecord[key])} onChange={(e) => setEditRecord({ ...editRecord, [key]: e.target.value })}
+                              className="bg-transparent block w-full border rounded-md py-2 px-2">
+                              <option className="bg-transparent text-black font-mono font-bold" value="">Select Gender</option>
+                              <option className="bg-transparent text-black font-mono font-bold" value="Male">Male</option>
+                              <option className="bg-transparent text-black font-mono font-bold" value="Female">Female</option>
+                              <option className="bg-transparent text-black font-mono font-bold" value="Other">Other</option>
+                            </select>
                           ) : (
-                            <input
-                              type={isDateField ? "date" : "text"}
-                              value={isDateField ? String(value).split("T")[0] : String(editRecord[key])}
-                              onChange={(e) =>setEditRecord({ ...editRecord, [key]: e.target.value })
-                              }
-                              className="bg-transparent block w-full border rounded-md py-2 px-2"
-                            />
+                            <input type={isDateField ? "date" : "text"} value={isDateField ? String(value) : String(editRecord[key])}
+                              onChange={(e) => setEditRecord({ ...editRecord, [key]: e.target.value })} className="bg-transparent block w-full border rounded-md py-2 px-2"/>
                           )}
                         </td>
                       </tr>
